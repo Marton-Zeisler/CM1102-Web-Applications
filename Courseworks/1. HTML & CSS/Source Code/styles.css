@@ -1,0 +1,95 @@
+body, html{
+	padding: 0;
+	margin: 0;
+	font-family: Arial, Verdana, sans-serif;
+}
+
+div.header{
+	background-image: url("header_bg.jpg");
+	height: 150px;
+	background-size: 100%;
+	width: 100%;
+	margin-top: 0;
+}
+
+div.header h1{
+	color: white;
+	text-align: center;
+	text-shadow: 2px 2px red;
+	padding-top: 40px;
+	font-size: 25pt;
+	text-decoration: underline;
+}
+
+div.header ul{
+	text-align: center;
+}
+
+div.header li{
+	border-left: 2px solid white;
+	padding: 10px;
+	list-style: none;
+	display: inline;
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+div.header a:link, a:visited{
+	color: #2dd5ff;
+	text-decoration: none;
+}
+
+div.header a:hover, a:active{
+	color: white;
+	text-decoration: underline;
+}
+
+.body_content{
+	padding: 30px;
+}
+
+.body_header{
+	font-size: 30px;
+	text-align: center;
+}
+
+.body_image{
+	float: left;
+	padding-right: 20px;
+}
+
+.body_image2{
+	float: right;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+.body_text{
+	padding-left: 10px;
+	text-align: justify;
+	font-size: 20px;
+}
+
+table{
+	width: 800px;
+	table-layout: auto;
+	text-align: center;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#tableTitle{
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
