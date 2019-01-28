@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>Pizza</title>
+    <script>
+        function clicked(){
+            var hamChecked = document.getElementById("Ham").checked
+            var baconChecked = document.getElementById("Bacon").checked
+            var mushChecked = document.getElementById("Mushroom").checked
+            var salamiChecked = document.getElementById("Salami").checked
+            var pinappleChecked = document.getElementById("Pineapple").checked
+
+            document.getElementById("Salami").disabled = pinappleChecked
+            document.getElementById("Pineapple").disabled = salamiChecked
+
+            var checks = 0
+            for(var i=0; i<document.getElementsByTagName("INPUT").length; i++){
+                if (document.getElementsByTagName("INPUT")[i].checked){
+                    checks = checks + 1
+                }
+            }
+
+            if (checks == 3){
+                for(var i=0; i<document.getElementsByTagName("INPUT").length; i++){
+                    if (document.getElementsByTagName("INPUT")[i].checked == false){
+                        document.getElementsByTagName("INPUT")[i].disabled = !document.getElementsByTagName("INPUT")[i].checked
+                    }
+                }
+            }else{
+                for(var i=0; i<document.getElementsByTagName("INPUT").length; i++){
+                    document.getElementsByTagName("INPUT")[i].disabled = false
+                }
+                document.getElementById("Salami").disabled = pinappleChecked
+                document.getElementById("Pineapple").disabled = salamiChecked
+            }
+            
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Select your toppings:</h1>
+
+    <input type="checkbox" id="Ham" onclick="clicked()">Ham<br />
+    <input type="checkbox" id="Bacon" onclick="clicked()">Bacon<br />
+    <input type="checkbox" id="Mushroom" onclick="clicked()">Mushroom<br />
+    <input type="checkbox" id="Salami" onclick="clicked()">Salami<br />
+    <input type="checkbox" id="Pineapple" onclick="clicked()">Pineapple<br />
+    
+</body>
+</html>

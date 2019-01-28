@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>Image</title>
+    <script>
+        function moveImage(){
+            var randomRight = Math.floor((Math.random() * 100) + 1)
+            var randomLeft = Math.floor((Math.random() * 100) + 1)
+            document.getElementById('image').style.position="absolute"
+            document.getElementById('image').style.left = randomLeft.toString()
+            document.getElementById('image').style.right = randomRight.toString()
+        }
+    </script>
+</head>
+<body>
+    
+    <img id="image" onmouseover="moveImage()" src="img.png" />
+</body>
+</html>

@@ -1,0 +1,97 @@
+<html>
+<head>
+    <title>Ohm's law</title>
+
+    <script>
+            function clicked(){
+                var Resistance = document.getElementById("Resistance").value
+                var Voltage = document.getElementById("Voltage").value
+                var Current = document.getElementById("Current").value
+
+                if (Resistance != "" && Voltage != "" && Current != ""){
+                    alert("Leave one empty!");
+                    return false
+                }else if (Resistance == "" && Voltage == "" && Current == ""){
+                    alert("Leave one empty, fill two!")
+                    return false
+                }
+
+                if (Resistance != ""){
+                    if (isNumber(Resistance) == false){
+                        alert("Numbers only")
+                        return false
+                    }
+                }
+
+                if (Voltage != ""){
+                    if (isNumber(Voltage) == false){
+                        alert("Numbers only")
+                        return false
+                    }
+                }
+
+                if (Current != ""){
+                    if (isNumber(Current) == false){
+                        alert("Numbers only")
+                        return false
+                    }
+                }
+
+                if (Resistance == ""){
+                    document.getElementById("Resistance").value = (parseInt(Voltage) / parseInt(Current)).toString()
+                }else if (Voltage == ""){
+                    document.getElementById("Voltage").value = (parseInt(Current) * parseInt(Resistance)).toString()
+                }else if (Current == ""){
+                    document.getElementById("Current").value = (parseInt(Voltage) / parseInt(Resistance)).toString()
+                }
+    
+                return false
+            }
+
+            function isNumber(val) {
+                return !isNaN(parseFloat(val)) && isFinite(val)
+            }
+
+            function onFocusResistance(){
+                document.getElementById("answer").style.color = "red"
+                document.getElementById("answer").innerHTML = "resistance pls"
+            }
+
+            function onFocusVoltage(){
+                document.getElementById("answer").style.color = "red"
+                document.getElementById("answer").innerHTML = "voltage pls"
+            }
+
+            function onFocusCurrent(){
+                document.getElementById("answer").style.color = "red"
+                document.getElementById("answer").innerHTML = "current pls"
+            }
+
+            function onBlur(){
+                document.getElementById("answer").style.color = "black"
+                document.getElementById("answer").innerHTML = "..."
+            }
+
+        </script>
+
+
+</head>
+<body>
+    
+    <form name="" onsubmit="return clicked()">
+    Resistance
+    <input type="text" id="Resistance" name="" onblur="onBlur()" onfocus="onFocusResistance()"">
+    <br />
+    Voltage
+    <input type="text" id="Voltage" name="" onblur="onBlur()" onfocus="onFocusVoltage()">
+    <br />
+    Current
+    <input type="text" id="Current" name="" onblur="onBlur()" onfocus="onFocusCurrent()">
+    <br />
+    <input type="submit" value="Submit" name="">
+    </form>
+
+    <h1 id="answer">...</h1>
+
+</body>
+</html>
