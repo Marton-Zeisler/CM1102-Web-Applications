@@ -1,0 +1,66 @@
+use cm1102;
+/* In which branch does David Ford work? */
+select branchNo from Staff where firstName="David" and lastName="Ford";
+
+/* Which employees work in branch B003? */
+select firstName, lastName from Staff where branchNo="B003";
+
+/* Which branches are located in London? */
+select * from Branch where city="London";
+
+/* What are the names of employees who have salary greater than 20,000? */
+select firstName, lastName from Staff where salary>20000;
+
+/* What is the average salary? The largest? The smallest? */
+select avg(salary) from Staff;
+select max(salary) from Staff;
+select min(salary) from Staff;
+
+/* What are the names of employees who have a below average salary? Above
+  average? */
+select firstName, lastName from Staff where salary<(select avg(salary) from Staff);
+select firstName, lastName from Staff where salary>(select avg(salary) from Staff);
+
+/* Produce the list of all employees sorted by salary in ascending order. Do the same in descending order. */
+select * from Staff order by salary asc;
+select * from Staff order by salary desc;
+
+/* Who are the three lowest paid employees? */
+select * from Staff order by salary asc limit 3;
+
+/* Determine the set of all job titles (positions). That is, find the list of all job titles without duplication. */
+select distinct position from Staff;
+
+/* What are the names and salaries of employees who work in London? */
+select firstName, lastName, salary from Staff inner join Branch on Staff.branchNo=Branch.branchNo where city="London";
+
+/* Are there any assistants working in Aberdeen? */
+select firstName, lastName, salary from Staff inner join Branch on Staff.branchNo=Branch.branchNo where city="Aberdeen" and position="Assistant";
+
+/* Employees in which city have the highest salary? */
+select firstName, lastName, city from Staff inner join Branch on Staff.branchNo=Branch.branchNo order by salary desc limit 1;
+
+/* What is the top salary in Glasgow? */
+select city, salary from Staff inner join Branch on Staff.branchNo=Branch.branchNo where city="Glasgow" order by salary desc limit 1;
+
+/* Which branches do not have a manager? */
+select * from Branch where branchNo not in (select distinct branchNo from Staff where position="Manager");
+
+/* Which branches do not have any employees? */
+select * from Branch where branchNo not in (select distinct branchNo from Staff);
+
+/* Find all last names ending with an ``e''. */
+select lastName from Staff where lastName like "%e";
+
+/* Reward Susan Brand who works in B003 as a manager by raising her salary to 36,000. */
+update Staff set salary=36000 where branchNo="B003" and firstName="Susan" and lastName="Brand";
+
+/* In fact, let's reward all managers: raise their salaries by 10%. */
+update Staff set salary=salary*1.1 where position="Manager";
+
+/* Branch B007 is closing. Remove all employees working there, and remove the branch itself. */
+delete from Staff where branchNo="B007";
+delete from Branch where branchNo="B007";
+
+/* Hire a new employee. Her name is Mary Smith and she will be working as an assistant in the Glasgow branch with the starting salary of 22,000. */
+insert into Staff values("SG42", "Mary", "Smith", "Assistant", 22000, "B003");
