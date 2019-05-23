@@ -1,0 +1,25 @@
+Home
+ - List of products
+ - Filter products
+ - Add product to wish list
+ - Add product to basket
+ - Click on product for more information 
+
+Product
+ - Information about given product
+ - Add product to wish list
+ - Add product to basket
+ - Read and write reviews
+ 
+Basket
+ - List of products added
+ - Click on product for more information 
+ - Delete all or selected products
+ - Total price
+
+
+Login
+
+Register
+
+Account

@@ -1,0 +1,36 @@
+STUDENT NUMBER: 1841485
+
+NAME: Marton Zeisler
+
+EMAIL: ZeislerM@cardiff.ac.uk
+
+URL: http://amazon-web-amazon-store.apps.cs.cf.ac.uk
+
+CHECKSUM: e4ccf335563a0458166625391847445aa45702c9
+
+
+ADVANCED FEATURES:
+- Comments section. On each product page, users can submit comments and read other people's comments about the product. It's only possible if they login first. Comments are stored in the database and linked to each product.
+
+- Wish list. If a user is logged in, the user can add products to their wish list. This Wishlist is stored in database and linked to each user. Users can also remove products one by one from their wish list or they can also delete them all using just one button.
+
+- My Orders. After a user checks out their basket, a new order is placed for the user. The user can view his or her previous orders and get detailed information on each order such as total price, products and the number of products purchased. Each user's orders are stored in the database.
+
+- Encrypted password. Passwords are encrypted in the database using bcrypt.
+
+- Dynamic navigation bar. The navigation bar only shows Login and Sign Up options in the navigation bar when the user is not logged in. Once the user logs in, all the other options such as basket are displayed in the navigation bar.
+
+
+
+
+TECHNOLOGIES I USED:
+- FLASK
+- PYTHON
+- HTML
+- CSS
+- SQL
+- SQLAlCHEMY
+- BCRYPT
+- LOGINMANAGER
+- WTFORMS
+- BOOSTRAP

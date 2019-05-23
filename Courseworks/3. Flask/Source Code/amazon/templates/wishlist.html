@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="centerDiv">
+    <h3>My Wish List</h3>
+    <h6>Items added: {{ products.count() }}</h6>
+    <div style="padding-top: 10px">
+        {% if products.count() > 0 %}
+            <a href="{{ url_for('wishlist', deleteAll='True') }}"><button type="button" class="btn btn-danger">Delete All</button></a>
+            <a href="{{ url_for('home') }}"><button type="button" class="btn btn-primary">Add More</button></a>
+        {% else %}
+            <a href="{{ url_for('home') }}"><button type="button" class="btn btn-primary">Add More</button></a>
+        {% endif %}
+
+    </div>
+</div>
+
+
+<div class="container" style="margin-top: 30px">
+    <div class="card-deck text-center">
+
+        {% for product in products %}
+
+            <div class="col-sm-6 col-md-4 col-lg-4">
+                <div class="card mb-4">
+                    <a href="{{ url_for('product', product_id=product.id) }}"><img class="card-img-top img-fluid"
+                            src="{{ url_for('static', filename='product_pics/' ~ product.id ~ '.jpg') }}"
+                            alt="Card image cap"></a>
+                    <div class="card-body" style="height: 20%">
+                        <a href="{{ url_for('product', product_id=product.id) }}">
+                            <h4 class="card-title">{{ product.title }}</h4>
+                        </a>
+                        <h6 style="color: red">${{ product.price }}</h6>
+                        <p class="card-text"><small class="text-muted">{{ product.year }} Model</small></p>
+                        <p class="card-text">{{ product.description }}</p>
+                        <a href="{{ url_for('wishlist', delete=product.id) }}"><button type="button" style="margin-top: 10px; width: 150px" class="btn btn-danger btn-sm">Remove</button></a><br />
+                        <a href="{{ url_for('home', addBasket=product.id) }}"><button type="button" style="margin-top: 10px; width: 150px;" class="btn btn-primary btn-sm">Add to
+                            basket</button></a>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+
+
+
+
+    </div>
+</div>
+
+{% endblock content %}

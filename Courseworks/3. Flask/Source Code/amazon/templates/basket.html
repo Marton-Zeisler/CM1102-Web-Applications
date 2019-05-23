@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="centerDiv">
+  <h3>Shopping Basket</h3>
+  <h6>Products added: {{ totalProducts }}</h6>
+  <h6 style="color: rgb(7, 165, 60)">Total Price: ${{ totalPrice }}</h6>
+  <div style="padding-top: 10px">
+    {% if totalProducts > 0 %}
+      <a href="{{ url_for('basket', deleteAll=True) }}"><button type="button" class="btn btn-danger">Delete All</button></a>
+      <a href="{{ url_for('home') }}"><button type="button" class="btn btn-primary">Add More</button></a>
+      <a href="{{ url_for('checkout', ready=True, totalPrice=totalPrice) }}"><button type="button" class="btn btn-warning">Check Out</button></a>
+    {% else %}
+      <a href="{{ url_for('home') }}"><button type="button" class="btn btn-primary">Add Products</button></a>
+    {% endif %}
+  </div>
+</div>
+
+
+{% if totalProducts > 0 %}
+
+<div style="margin-top: 50px">
+  <table class="table"
+    style="text-align: center; width: 80%; font-weight: bold; margin:0 auto; background-color: rgb(233, 233, 233)">
+    <thead class="thead-dark">
+      <tr>
+        <th style="width: 10%" scope="col">Quantity</th>
+        <th style="width: 30%" scope="col">Product Name</th>
+        <th style="width: 10%" scope="col">Price</th>
+        <th style="width: 50%" scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for basketObject in userBasketObjects %}
+
+        <tr>
+          <th scope="row">{{ basketObject.basket.quantity }}</th>
+          <td> {{ basketObject.product.title }} </td>
+          <td>${{ basketObject.basket.priceTotal }}</td>
+          <td>
+            <a href="{{ url_for('basket', add=basketObject.basket.id) }}"><button type="button" class="btn btn-dark btn-sm" style="width: 80px">+</button></a>
+            <a href="{{ url_for('basket', subtract=basketObject.basket.id) }}"><button type="button" class="btn btn-light btn-sm" style="margin-left: 10px; width: 80px">-</button></a>
+            <a href="{{ url_for('basket', delete=basketObject.basket.id) }}"><button type="button" class="btn btn-danger btn-sm" style="margin-left: 10px; width: 80px">Delete</button></a>
+          </td>
+        </tr>
+
+      {% endfor %}
+    </tbody>
+  </table>
+
+</div>
+
+{% endif %}
+
+{% endblock content %}

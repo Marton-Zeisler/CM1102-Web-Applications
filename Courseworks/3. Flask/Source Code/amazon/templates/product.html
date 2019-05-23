@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="centerDiv">
+    <h2>{{ product.title }}</h2>
+    <small class="text-muted">{{ product.year }} Model</small><br /><br />
+    <img width="25%" height="25%" 
+        src="{{ url_for('static', filename='product_pics/' ~ product.id ~ '.jpg') }}"><br /><br />
+    <h3 style="color: red">${{ product.price }}</h3>
+    <p style="margin-left: 50px; margin-right: 50px">{{ product.description }}</p>
+    <div class="button-group">
+        {% if productInWishList == False %}
+            <a href="{{ url_for('wishlist', addID=product.id) }}"><button type="button" style="margin-top: 10px" class="btn btn-dark btn-sm">Add to wishlist</button></a>
+        {% endif %}
+        <a href="{{ url_for('home', addBasket=product.id) }}"><button type="button" style="margin-top: 10px" class="btn btn-primary btn-sm">Add to basket</button></a>
+    </div>
+
+    <br /><br />
+
+    {% if current_user.is_authenticated %}
+        <h2>Discussion</h2><br />
+        <div style="width: 40%; margin: auto; text-align: left">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Submit your comment</legend>
+                <div class="form-group">
+                        {{ form.title.label(class="form-control-label") }}
+                        {% if form.title.errors %}
+                        {{ form.title(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.title(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                        {{ form.comment.label(class="form-control-label") }}
+                        {% if form.comment.errors %}
+                        {{ form.comment(class="form-control form-control-lg is-invalid")}}
+                        <div class="invalid-feedback">
+                            {% for error in form.comment.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.comment(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group" style="margin-top: -20px; margin-bottom: 30px">
+                {{ form.submit(class="btn btn-primary", style="width: 100%") }}
+            </div>
+        </form>
+        </div>
+
+        {% for comment in comments %}
+            <article class="media content-section" style="width: 50%; margin: auto; margin-bottom: 20px; margin-top: 10px">
+                <div class="media-body">
+                    <h3><a style="color: #f3852b" class="article-title" href="">{{ comment.title}}</a></h3>
+                    <p style="padding-top: 5px" class="article-content">{{ comment.comment }}</p>
+                </div>
+            </article>
+        {% endfor %}
+
+    {% else %}
+        <h6 style="color: red">You must be logged in to see the discussion for this product</h6>
+    {% endif %}
+    
+
+
+</div>
+
+
+
+{% endblock content %}

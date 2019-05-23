@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="centerDiv">
+    <h3>Available Products</h3>
+    <div class="btn-group dropright" style="padding-bottom: 30px; padding-top: 15px">
+        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            Sort By:
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ url_for('home', query='name-ascending') }}">Name - A-Z</a>
+            <a class="dropdown-item" href="{{ url_for('home', query='name-descending') }}">Name - Z-A</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ url_for('home', query='price-ascending') }}">Price - Acending</a>
+            <a class="dropdown-item" href="{{ url_for('home', query='price-descending') }}">Price - Descending</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ url_for('home', query='year-ascending') }}">Model year - Ascending</a>
+            <a class="dropdown-item" href="{{ url_for('home', query='year-descending') }}">Model year - Descending</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card-deck text-center">
+        {% for product in products %}
+        <div class="col-sm-6 col-md-4 col-lg-4">
+            <div class="card mb-4">
+                <a href="{{ url_for('product', product_id=product.id) }}"><img class="card-img-top img-fluid"
+                        src="{{ url_for('static', filename='product_pics/' ~ product.id ~ '.jpg') }}"
+                        alt="Product Image"></a>
+                <div class="card-body" style="height: 20%">
+                    <a href="{{ url_for('product', product_id=product.id) }}">
+                        <h4 class="card-title">{{ product.title }}</h4>
+                    </a>
+                    <h6 style="color: red">${{ product.price }}</h6>
+                    <p class="card-text"><small class="text-muted">{{ product.year }} Model</small></p>
+                    <p class="card-text">{{ product.description }}</p>
+                    {% if product.id not in wishProductIDs %}
+                        <a href="{{ url_for('wishlist', addID=product.id) }}"><button type="button" style="margin-top: 10px; width: 150px" class="btn btn-dark btn-sm">Add to wish
+                        list</button></a><br />
+                    {% endif %}
+                    <a href="{{ url_for('home', addBasket=product.id) }}"><button type="button" style="margin-top: 10px; width: 150px" class="btn btn-primary btn-sm">Add to
+                        basket</button></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="centerDiv">
+    <h3>My Previous Orders</h3>
+    <h6>Number of orders: {{ ordersAndProducts|length }}</h6>
+</div>
+
+<div style="margin-top: 50px">
+  
+  {% for order, products in ordersAndProducts.items() %}
+
+    <table class="table"
+      style="text-align: center; width: 80%; font-weight: bold; margin:0 auto; background-color: rgb(233, 233, 233)">
+      <h4 style="text-align: center; padding-bottom: 10px">{{ order.date.strftime("%d-%m-%Y") }} - <span style="color: red">${{ order.priceTotal }}</span></h4>
+      <thead class="thead-dark">
+        <tr>
+          <th style="width: 10%" scope="col">Quantity</th>
+          <th style="width: 30%" scope="col">Product Name</th>
+          <th style="width: 10%" scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for product in products %}
+        <tr>
+          <th scope="row">{{product.quantity}}</th>
+          <td>{{product.product_title}}</td>
+          <td>${{ product.priceTotal }}</td>
+        </tr>
+
+        {% endfor %}
+        
+      </tbody>
+    </table><br /><br />
+
+    {% endfor %}
+  
+  </div>
+
+
+
+{% endblock content %}

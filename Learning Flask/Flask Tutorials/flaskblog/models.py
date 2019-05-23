@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
         s = Serializer(app.config["SECRET_KEY"], expires_sec)
         return s.dumps({"user_id": self.id}).decode("utf-8")
 
-    @staticmethod
+    @staticmethodmode
     def verify_reset_token(token):
         s = Serializer(app.config["SECRET_KEY"])
         try:
